@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="SearchGoogleMap">
+
+	<target name="defaultTest" depends="fullTest">
+	</target>
+	
+	<!-- Maven Dependencies repository classpath  -->
+    <path id="Maven Dependencies.libraryclasspath">
+    	<fileset dir="../${maven.repo.dir}">
+    		<include name="*.jar"></include>
+    	</fileset>
+    </path>
+     
+    <!--upwork libraries path -->
+    <path id="upwork.classpath">
+    	<fileset dir="../lib">
+    		<include name="*.jar"></include>
+    	</fileset>
+    	<pathelement location="../target/classes"/>
+        <pathelement location="../target/test-classes"/>
+    	<path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+	
+	<condition property="isProd">
+		<equals arg1="prod" arg2="${TEST_ENV}" casesensitive="false" trim="true" />
+	</condition>
+	
+	<target name="fullTest">
+		<antcall target="Homepage"/>
+	</target>
+	
+	<target name="Homepage" unless="isHomepage">
+		<antcall target="HomepageLogin"/>		
+	</target>
+	
+	
+  <!-- execute the JAVA format test case in JAVA -->
+    <target name="HomepageAlive (1)">
+        <java classname="com.upwork.tests.HomepageAlive" failonerror="true" fork="yes">
+        	<classpath refid="upwork.classpath"/>
+   		 	<classpath refid="Maven Dependencies.libraryclasspath"/>
+        </java>
+    </target>
+	    
+	<!-- execute the JAVA format test cases in JUNIT -->
+	
+	<!-- homepage -->
+    
+	<target name="HomepageLogin">
+    	<mkdir dir="${screenshot.dir}/${ant.project.invoked-targets}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+        	<sysproperty key="host" value="${TEST_HOST}"/>
+        	<sysproperty key="upworkHost" value="${TEST_ENV}"/>
+        	<sysproperty key="screenShotDir" value="${screenshot.dir}/${ant.project.invoked-targets}"/>
+        	<sysproperty key="tableContainer" value="${basedir}/HomepageLogin.xls"/>
+            <test name="com.upwork.tests.HomepageLogin" todir="../${junit.output.dir}"/>
+           	<classpath refid="upwork.classpath"/>
+   		 	<classpath refid="Maven Dependencies.libraryclasspath"/>
+        </junit>
+    </target>
+	
+	<target name="SearchGoogleMap">
+	    	<mkdir dir="${screenshot.dir}/${ant.project.invoked-targets}"/>
+	        <junit fork="yes" printsummary="withOutAndErr">
+	            <formatter type="xml"/>
+	        	<sysproperty key="host" value="${TEST_HOST}"/>
+	        	<sysproperty key="upworkHost" value="${TEST_ENV}"/>
+	        	<sysproperty key="screenShotDir" value="${screenshot.dir}/${ant.project.invoked-targets}"/>
+	        	<sysproperty key="tableContainer" value="${basedir}/SearchGoogleMap.xls"/>
+	        	<sysproperty key="tableOutPutContainer" value="${junit.output.dir}/SearchGoogleMapOutPut.xls"/>
+	            <test name="com.upwork.SearchGoogleMap" todir="../${junit.output.dir}"/>
+	           	<classpath refid="upwork.classpath"/>
+	   		 	<classpath refid="Maven Dependencies.libraryclasspath"/>
+	        </junit>
+	    </target>
+	
+</project>
