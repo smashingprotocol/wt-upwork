@@ -8,13 +8,13 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.upwork.engine.Config;
-import com.upwork.includes.Search;
-import com.upwork.request.ClickElement;
-import com.upwork.utility.StatusLog;
-import com.upwork.utility.TableContainer;
-import com.upwork.utility.TakeScreenShot;
-import com.upwork.verify.verifyXPath;
+import com.grund.engine.Config;
+import com.tools.includes.Search;
+import com.grund.request.ClickElement;
+import com.grund.utility.StatusLog;
+import com.grund.utility.TableContainer;
+import com.grund.utility.TakeScreenShot;
+import com.grund.verify.verifyXPath;
 
 public class SearchGoogleMap {
 
@@ -37,7 +37,7 @@ public class SearchGoogleMap {
 			
 			Config.setup(sys.getProperty("host"));
 			env = sys.getProperty("upworkHost");
-			Properties pr = Config.properties(); //create a method for the pcm.properies
+			Properties pr = Config.properties("upwork.properties"); //create a method for the pcm.properies
 			
 			//Long wait = Long.parseLong(pr.getProperty("WAIT_SEC"));
 			//Get the data in the excel and quick add the skus

@@ -108,7 +108,7 @@
 	<target name="create-dist">
 		<!--<delete dir="${dist}"/>
 		<mkdir dir="${dist}/${project.Name}"/> -->
-		<copy includeemptydirs="false" todir="${dist}/${project.Name}" overwrite="true">
+		<copy includeemptydirs="false" todir="${dist}/dist-${project.Name}" overwrite="true">
             <fileset dir="../${project.Name}">
                 <exclude name="**/src/"/>
             	 <exclude name="**/*.java"/>
