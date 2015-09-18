@@ -40,7 +40,7 @@
        <!-- excel -->
        <groupId>org.apache.poi</groupId>
        <artifactId>poi</artifactId>
-       <version>3.1-FINAL</version>
+       <version>3.13-beta1</version>
        <scope>compile</scope>
    </dependency>
 
